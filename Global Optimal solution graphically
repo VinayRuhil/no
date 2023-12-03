@@ -1,0 +1,26 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+def obj_func(x):
+  return -10*np.cos(np.pi*x-2.2)+(x+1.5)*x
+x=np.linspace(-10,10,1000)
+y=obj_func(x)
+plt.plot(x,y,marker='*',label='-10*np.cos(np.pi*x-2.2)+(x+1.5)*x', alpha=0.2)
+plt.xlabel("x-axis")
+plt.ylabel("y-axis")
+plt.title("Graph of function -10*np.cos(np.pi*x-2.2)+(x+1.5)*x")
+plt.grid(True)
+
+
+min_y=min(y)
+print("minimum-x: ",min_y)
+min_ind_y=np.argmin(y)
+min_x=x[min_ind_y]
+print("minimum of x: ",min_x)
+plt.scatter(min_x,min_y,c='red',label='global minimum')
+
+
+#print("value of the function is: ",obj_func(y))
+plt.legend()
+plt.show()
