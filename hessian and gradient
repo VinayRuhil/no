@@ -1,17 +1,18 @@
 import sympy as sp
+
 # Define the variables and the function
 x, y = sp.symbols("x y")
-fx = 100*((x2 - x1**2)**2) + ((1 - x1)**2)
-grad = [sp.diff(fx, var) for var in (x1, x2)]
-e1 = sp.diff(grad[0], x1)
-e2 = sp.diff(grad[0], x2)
-e3 = sp.diff(grad[1], x1)
-e4 = sp.diff(grad[1], x2)
-
+fx = 100*((y - x**2)**2) + ((1 - x)**2)
+grad = [sp.diff(fx, var) for var in (x, y)]
+e1 = sp.diff(grad[0], x)
+e2 = sp.diff(grad[0], y)
+e3 = sp.diff(grad[1], x)
+e4 = sp.diff(grad[1], y)
 
 Mat = sp.Matrix([[e1, e2], [e3, e4]])
-print("Hessian Matrix of f(x1, x2):")
-Mat
+print("Hessian Matrix of f(x, y):")
+print(Mat)
+
 
 
 
@@ -36,4 +37,4 @@ f = 100 * (x2 - x1**2)**2 + (1 - x1)**2
 
 grad=[diff(f,x1),diff(f,x2)]
 print('Gradient of f')
-grad
+print(grad)
