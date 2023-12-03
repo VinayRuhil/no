@@ -1,0 +1,49 @@
+import pulp
+import matplotlib.pyplot as plt
+c1=3
+c2=2
+a1=1
+a2=1
+a3=2
+a4=1
+b1=4
+b2=6
+b3=12
+
+
+x1=[4 for i in range(0,11)]
+y1=[i for i in range(0,11)]
+x2=[i for i in range(0,11)]
+y2=[6 for i in range(0,11)]
+x3=[i for i in range(0,6)]
+y3=[(b3-a3*val)/a4 for val in x3]
+plt.plot(x1,y1, marker='.',c='darkgreen')
+plt.plot(x2,y2, marker='.',c='orange')
+plt.plot(x3,y3, marker='.',c='blue')
+plt.fill([0,4,4,3,0], [0,0,4,6,6],'b',alpha=0.5)
+plt.scatter([0,4,4,3,0], [0,0,4,6,6],c="Red", marker="o",label="Corner points")
+plt.xlabel('x-axis')
+plt.ylabel('y-axis')
+lp_problem=pulp.LpProblem("LPP",pulp.LpMaximize)
+x=pulp.LpVariable("x",lowBound=0)
+y=pulp.LpVariable("y",lowBound=0)
+lp_problem+=3*x + 2*y
+lp_problem+=x<=4
+lp_problem+=y<=6
+lp_problem+= (2*x + y<=12)
+lp_problem.solve()
+print(lp_problem.status)
+print("->SOLution is: ",pulp.LpStatus[lp_problem.status])
+solx=x.varValue
+soly=y.varValue
+print("->At : \nx = ", solx)
+print("y= ",soly)
+print("->Max Z = " , pulp.value(lp_problem.objective))
+plt.scatter (solx, soly, marker="*",c="Red", s=145,label="optimal solution")
+
+
+print(pulp.value(lp_problem.objective))
+plt.grid()
+plt.title("Graph for Z = 3x + 2y\n")
+plt.legend()
+plt.show()
