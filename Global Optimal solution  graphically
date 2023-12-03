@@ -1,0 +1,16 @@
+import numpy as np
+from scipy.optimize import minimize_scalar
+
+
+def obj_fun(x):
+    return -10 * np.cos(np.pi * x - 2.2) + (x + 1.5) * x
+
+
+# Use scipy's minimize_scalar to find the minimum
+result = minimize_scalar(obj_fun)
+best_solution = result.x
+best_value = result.fun
+
+
+print("Global optimal solution:", best_solution)
+print("Best value:", best_value)
